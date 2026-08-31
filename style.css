@@ -388,6 +388,8 @@ body {
   margin-left: 0;
 }
 
+}  /* closes @media (max-width: 600px) */
+
 .handicap-info-btn {
   appearance: none;
   -webkit-appearance: none;
