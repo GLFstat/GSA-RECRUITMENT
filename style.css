@@ -388,6 +388,12 @@ body {
   margin-left: 0;
 }
 
+#results .section-kicker,
+#results h2 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
 }  /* closes @media (max-width: 600px) */
 
 .handicap-info-btn {
