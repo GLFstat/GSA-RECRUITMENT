@@ -781,5 +781,51 @@ function setupHandicapInfoModal() {
   });
 }
 
+function setupMobileMenu() {
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (!menuBtn || !mobileMenu) return;
+
+  const closeMenu = () => {
+    mobileMenu.hidden = true;
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.setAttribute("aria-label", "Open main menu");
+  };
+
+  const openMenu = () => {
+    mobileMenu.hidden = false;
+    menuBtn.setAttribute("aria-expanded", "true");
+    menuBtn.setAttribute("aria-label", "Close main menu");
+  };
+
+  menuBtn.addEventListener("click", () => {
+    if (mobileMenu.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !mobileMenu.hidden) {
+      closeMenu();
+      menuBtn.focus();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 980) {
+      closeMenu();
+    }
+  });
+}
+
+
 window.addEventListener("load", loadRecruitmentData);
 window.addEventListener("load", setupHandicapInfoModal);
+window.addEventListener("load", setupMobileMenu);

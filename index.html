@@ -22,11 +22,35 @@
       <a href="#academics">Academics</a> 
       <a href="#contact">Contact</a>
     </nav>
+
+<button
+  id="mobileMenuBtn"
+  class="mobile-menu-btn"
+  type="button"
+  aria-expanded="false"
+  aria-controls="mobileMenu"
+  aria-label="Open main menu"
+>
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<nav id="mobileMenu" class="mobile-menu" aria-label="Mobile navigation" hidden>
+  <a href="#about">About</a>
+  <a href="#performance">Performance</a>
+  <a href="#results">Results</a>
+  <a href="#video">Video</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#academics">Academics</a>
+  <a href="#contact">Contact</a>
+</nav>
+
   </header>
 
   <main id="top">
     <section class="hero">
-      <img class="hero-image" src="images/Isaiah-hdr-bg2.jpg" alt="Golf recruiting profile placeholder image">
+      <img class="hero-image" src="images/Isaiah-hdr-bg4.jpg" alt="Golf recruiting profile placeholder image">
       <div class="hero-shade"></div>
       <div class="hero-content shell">
         <div class="hero-copy">
@@ -36,11 +60,11 @@
         </div>
 
         <div class="stat-strip" aria-label="Player snapshot">
-          <div><strong><strong id="heroRecentScoringAvg">--</strong></strong><span>LAST 10 <br>SCORING AVG</span></div>
+          <div><strong><strong id="heroRecentScoringAvg">--</strong></strong><span>LAST 10 Rounds<br>SCORING AVG</span></div>
           <div>
   <strong id="heroHandicap">--</strong>
   <span>
-    Est. Handicap<br> Index
+    Last 10 Rounds<br>Est. Handicap Index
     <button
       id="handicapInfoBtn"
       class="handicap-info-btn"
@@ -67,7 +91,7 @@
         <p class="section-kicker">Player Profile</p>
         <h2>About Isaiah</h2>
 <div class="about-copy">
-  <img class="portrait" src="images/portrait-1.jpg" alt="Isaiah Gonzales">
+  <img class="portrait" src="images/portrait-2.jpg" alt="Isaiah Gonzales">
 
   <p class="lead">
     I love competing and seeing how much I can improve from one tournament to the next.
@@ -121,9 +145,19 @@
   aria-label="Last 10 round scoring trend">
 </svg>
 
+<div class="trend-legend" aria-label="Scoring trend legend">
+  <span><i class="legend-dot legend-good"></i> 68–78</span>
+  <span><i class="legend-dot legend-other"></i> Other Full Rounds</span>
+  <span><i class="legend-partial"></i> Partial Round</span>
+</div>
+
+<p class="trend-click-note">
+  Click a point on the trend chart to see round details.
+</p>
+
 <p id="trendSummary">Last 10 qualifying rounds</p>
 <div id="trendRoundInfo" class="trend-round-info" hidden></div>
-            <p>Consistent improvement over time</p>
+            <p></p>
           </article>
 
 <article class="metric-card">
@@ -157,7 +191,7 @@
 </article>
         </div>
 
-        <p class="data-note">Performance data shown here is placeholder content for layout development. The live version can draw from a recruiting-safe Stracker view.</p>
+        <p class="data-note"></p>
       </div>
     </section>
 
@@ -171,18 +205,19 @@
               <tr><th>Date</th><th>Event</th><th>Finish</th><th>Score</th></tr>
             </thead>
             <tbody>
-              <tr><td>Aug 2026</td><td>Colorado Junior PGA</td><td>T-8</td><td>74–73–71</td></tr>
-              <tr><td>Jul 2026</td><td>AJGA / Junior Event</td><td>T-15</td><td>76–72–73</td></tr>
-              <tr><td>Jun 2026</td><td>Forge Invitational</td><td>2</td><td>74–71</td></tr>
-              <tr><td>May 2026</td><td>State Championship</td><td>T-6</td><td>75–74</td></tr>
+              <tr><td>Jun 2026</td><td>CO JrPGA</td><td>Flatirons GC<br>Optimist Qualifier</td><td>75</td></tr>
+              <tr><td>Jun 2026</td><td>CO JrPGA</td><td>Applewood GC<br>Jr Player Series</td><td>74</td></tr>
+              <tr><td>May 2026</td><td>CO JrPGA</td><td>Racoon Creek<br>Jr Cup Series</td><td>72</td></tr>
+              <tr><td>May 2026</td><td>CO JrPGA</td><td>Broadlands GC<br>Jr Player Series</Jr></td><td>76</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="placeholder-note">Placeholder results only — replace with verified tournament history.</p>
+        <p class="placeholder-note"></p>
       </div>
 
       <div id="video">
         <p class="section-kicker">Player Video</p>
+
         <h2>See the Swing</h2>
         <a class="video-card" href="#" aria-label="Placeholder player video">
           <img src="images/video-placeholder.jpg" alt="Golf swing video placeholder">
@@ -200,9 +235,9 @@
           <p class="section-kicker">Where to Watch</p>
           <h2>Upcoming Schedule</h2>
           <div class="schedule-list">
-            <article><time>SEP 8–10</time><div><strong>Colorado Junior PGA</strong><span>Course / City placeholder</span></div></article>
-            <article><time>SEP 15–16</time><div><strong>Forge Invitational</strong><span>Course / City placeholder</span></div></article>
-            <article><time>SEP 22–23</time><div><strong>CHSAA Regional</strong><span>Course / City placeholder</span></div></article>
+            <article><time>SEP 2</time><div><strong>Forge Christian HS - Metro League</strong><span>Thorncreek GC / Thornton, CO</span></div></article>
+            <article><time>SEP 4</time><div><strong>Forge Christian HS - Metro League</strong><span>Legacy Rdige GC / Westminster, CO</span></div></article>
+            <article><time>SEP 8</time><div><strong>Forge Christian HS - Metro League</strong><span>Meadows GC / Littleton, CO</span></div></article>
           </div>
           <a class="text-link" href="#contact">Coaches: contact Isaiah for tee times →</a>
         </div>
@@ -249,9 +284,6 @@
     <div class="shell">Isaiah Gonzales Golf · Recruiting Profile</div>
   </footer>
 
-<footer class="footer">
-  <div class="shell">Isaiah Gonzales Golf · Recruiting Profile</div>
-</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="recruitment.js"></script>
@@ -284,7 +316,7 @@
     </p>
 
     <p>
-      Stracker follows the <strong>World Handicap System (WHS) score-counting methodology as closely as possible</strong> by calculating a Score Differential for each handicap-eligible round using the player’s score, Course Rating and Slope Rating for the tees played. This Estimated Handicap Index is then derived from the lowest qualifying differentials in the player’s recent scoring record.
+      The Stracker Stats Tracking system follows the <strong>World Handicap System (WHS) score-counting methodology as closely as possible</strong> by calculating a Score Differential for each handicap-eligible round using the player’s score, Course Rating and Slope Rating for the tees played. This Estimated Handicap Index is then derived from the lowest qualifying differentials in the player’s recent scoring record.
     </p>
 
     <p>
