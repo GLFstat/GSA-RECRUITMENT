@@ -1708,6 +1708,13 @@ body {
     height: 100%;
     object-fit: cover;
   }
+
+  @media (min-width: 981px) {
+  .first-glance .trend-card,
+  .first-glance #video {
+    cursor: pointer;
+  }
+}
 }
 
 

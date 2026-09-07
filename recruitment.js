@@ -907,10 +907,51 @@ function setupMobileMenu() {
   });
 }
 
+function setupFirstGlanceCardScroll() {
+  const trendCard = document.querySelector(".first-glance .trend-card");
+  const videoCard = document.querySelector(".first-glance #video");
+  const statStrip = document.querySelector(".stat-strip");
+  const header = document.querySelector(".site-header");
+
+  if (!trendCard || !videoCard || !statStrip) return;
+
+  const scrollToFirstGlance = event => {
+    if (window.innerWidth < 981) return;
+
+    // Preserve existing interactive controls.
+    if (
+      event.target.closest(
+        "a, button, [role='button'], .trend-point-hit, .trend-partial-point"
+      )
+    ) {
+      return;
+    }
+
+    const headerHeight = header ? header.offsetHeight : 0;
+
+    // Leave a small slice of the hero visible below the sticky header.
+    const heroReveal = 55;
+
+    const targetY =
+      statStrip.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerHeight -
+      heroReveal;
+
+    window.scrollTo({
+      top: targetY,
+      behavior: "smooth"
+    });
+  };
+
+  trendCard.addEventListener("click", scrollToFirstGlance);
+  videoCard.addEventListener("click", scrollToFirstGlance);
+}
 
 window.addEventListener("load", loadRecruitmentData);
 window.addEventListener("load", setupHandicapInfoModal);
 window.addEventListener("load", setupMobileMenu);
+window.addEventListener("load", setupFirstGlanceCardScroll);
 // Preview-only round details overlay. Existing chart data and calculations are preserved.
 function openTrendDetailsModal() {
   const modal = document.getElementById("trendDetailsModal");
