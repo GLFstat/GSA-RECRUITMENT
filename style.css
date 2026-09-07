@@ -93,7 +93,7 @@ img { display: block; max-width: 100%; }
   box-shadow: var(--shadow);
 }
 
-.lead { font-size:20px; line-height:1.55; margin-top:0; }
+.lead { font-size:16px; line-height:1.55; margin-top:0; }
 .signature { font-family:Georgia, serif; font-style:italic; font-size:25px; margin-top:26px; }
 .quick-card { border-top:5px solid var(--gold); background:#fff; box-shadow:var(--shadow); padding:26px; }
 .quick-card h3 { margin-top:0; font-size:23px; }
@@ -660,3 +660,1126 @@ body {
   color: var(--muted);
   font-style: italic;
 }
+
+/* =========================================================
+   RECRUITMENT MOBILE REDESIGN V2
+   Top mobile flow:
+   compact header -> short hero -> 2x2 stats -> trend -> video
+   ========================================================= */
+
+.first-glance {
+  background: #edf2f5;
+  padding: 26px 0 30px;
+}
+
+.first-glance-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.first-glance .trend-card,
+.first-glance #video {
+  min-width: 0;
+}
+
+.first-glance .trend-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px;
+}
+
+.first-glance-title,
+.first-glance #video h2 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 25px;
+  line-height: 1.08;
+}
+
+.results-only {
+  display: block;
+}
+
+.performance-metrics-grid {
+  grid-template-columns: repeat(3, minmax(0,1fr));
+}
+
+@media (max-width: 680px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .shell {
+    width: calc(100% - 24px);
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    min-height: 62px;
+    padding: 7px 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-mark {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .brand strong {
+    font-size: 11px;
+    line-height: 1.05;
+  }
+
+  .brand small {
+    font-size: 9px;
+  }
+
+  .mobile-menu-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero {
+    min-height: 0;
+    height: 205px;
+    overflow: hidden;
+  }
+
+  .hero-image,
+  .hero-shade {
+    height: 205px;
+  }
+
+  .hero-image {
+    object-position: 62% 29%;
+    filter: saturate(1.08) contrast(.92);
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(90deg, rgba(2,18,31,.86) 0%, rgba(2,18,31,.56) 47%, rgba(2,18,31,.10) 78%);
+  }
+
+
+.hero-copy {
+  width: 66%;
+  min-height: 0;
+  margin-left: -10px;
+  margin-top: 35px;
+  padding: 10px 0 10px 13px;
+  border-left: 4px solid var(--gold);
+}
+
+.hero-content {
+  min-height: 205px;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.hero-copy {
+  width: 66%;
+  min-height: 0;
+  margin-left: 0px;
+  margin-top: -10px;
+  padding: 0px 0 10px 20px;
+  border-left: 4px solid var(--gold);
+}
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: .14em;
+  }
+
+  .hero h1 {
+    margin: 4px 0 7px;
+    font-size: clamp(28px, 9.4vw, 38px);
+    line-height: .89;
+    letter-spacing: -.035em;
+  }
+
+  .hero-sub {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  /* This block is now physically below the hero, not overlaid inside it. */
+  .stat-strip {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .stat-strip > div {
+    min-width: 0;
+    min-height: 82px;
+    padding: 11px 12px 10px 16px;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-strip strong {
+    font-size: 25px;
+    line-height: 1;
+  }
+
+  .stat-strip span {
+    margin-top: 6px;
+    font-size: 9px;
+    line-height: 1.15;
+    letter-spacing: .07em;
+  }
+
+  .handicap-info-btn {
+    transform: scale(.88);
+    transform-origin: left center;
+  }
+
+  .first-glance {
+    padding: 11px 0 17px;
+  }
+
+  .first-glance-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .first-glance .trend-card,
+  .first-glance #video {
+    width: 100%;
+  }
+
+  .first-glance .trend-card {
+    padding: 9px 8px 8px;
+    border-radius: 4px;
+  }
+
+  .first-glance-title,
+  .first-glance #video h2 {
+    margin: 0 0 3px;
+    font-size: 19px;
+    line-height: 1.05;
+  }
+
+  .first-glance .trend-chart {
+    display: block;
+    width: 100%;
+    height: 112px;
+    margin: 0;
+  }
+
+  .first-glance .trend-legend {
+    margin-top: 1px;
+    gap: 3px 8px;
+    font-size: 8px;
+    line-height: 1.15;
+  }
+
+  .first-glance .trend-click-note {
+    margin: 3px 0 0;
+    font-size: 9px;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .first-glance #trendSummary {
+    margin: 2px 0 0;
+    font-size: 9px;
+    text-align: center;
+  }
+
+  .first-glance .trend-round-info {
+    margin-top: 6px;
+    font-size: 10px;
+  }
+
+  .first-glance #video {
+    padding: 0;
+  }
+
+  .first-glance .video-card {
+    margin: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: none;
+  }
+
+  .first-glance .video-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 5.2;
+    object-fit: cover;
+    object-position: center 43%;
+  }
+
+  .first-glance .play {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  /* The longer profile now begins AFTER the first-glance recruiting material. */
+  #about.section {
+    padding-top: 42px;
+  }
+
+  #performance.section,
+  #results.section {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  .performance-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .performance-metrics-grid .metric-card {
+    min-height: 104px;
+    padding: 14px 10px;
+  }
+
+  .results-only {
+    display: block;
+  }
+}
+
+@media (max-width: 340px) {
+  .hero-copy {
+    width: 70%;
+  }
+
+  .hero h1 {
+    font-size: 27px;
+  }
+
+  .stat-strip > div {
+    padding-left: 12px;
+  }
+
+  .stat-strip span {
+    font-size: 8px;
+  }
+}
+
+/* Recruitment refinement V3 */
+.stat-strip > div { color:#fff !important; }
+.stat-strip strong, .stat-strip strong strong { color:#fff !important; }
+.stat-strip span { color:#c9ad52 !important; }
+.stat-strip .handicap-info-btn { color:#c9ad52 !important; }
+.trend-heading-row { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+.trend-heading-row .first-glance-title { flex:0 0 auto; }
+.trend-heading-row #trendSummary { margin:0; max-width:55%; text-align:right; font-size:12px; line-height:1.3; font-weight:600; color:var(--navy); }
+.trend-click-note { font-size:13px; line-height:1.35; }
+.trend-details-modal[hidden] { display:none !important; }
+.trend-details-modal { position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:16px; }
+.trend-details-backdrop { position:absolute; inset:0; background:rgba(0,0,0,.65); }
+.trend-details-dialog { position:relative; width:min(100%,440px); max-height:calc(100dvh - 32px); overflow:auto; background:#fff; color:#183147; border-radius:10px; padding:42px 20px 20px; box-shadow:0 16px 50px rgba(0,0,0,.25); }
+.trend-details-close { position:absolute; top:8px; right:10px; border:0; background:transparent; color:#183147; font-size:30px; line-height:1; cursor:pointer; padding:4px 10px; }
+.trend-details-dialog .trend-round-info { display:block; margin:0; }
+
+
+@media (max-width: 680px) {
+  .trend-heading-row { gap: 8px; }
+  .trend-heading-row .first-glance-title { font-size: 19px; }
+  .trend-heading-row #trendSummary,
+  .first-glance #trendSummary {
+    max-width: 58%;
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.2;
+    text-align: right;
+  }
+  .first-glance .trend-chart { height: 150px; }
+  .first-glance .trend-click-note {
+    font-size: 12px;
+    line-height: 1.3;
+    margin: 5px 0 0;
+  }
+  .first-glance .trend-legend { font-size: 10px; }
+}
+
+/* Give the Swing Video its own white card */
+.first-glance #video {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px;
+  min-width: 0;
+}
+
+.first-glance #video h2 {
+  margin: 0 0 12px;
+}
+
+.first-glance #video .video-card {
+  display: block;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+@media (max-width: 680px) {
+  .first-glance-grid {
+    gap: 14px;
+  }
+
+  .first-glance #video {
+    padding: 10px;
+  }
+
+  .first-glance #video h2 {
+    margin: 0 0 8px;
+  }
+
+  .first-glance #video .video-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  /* Performance Snapshot heading */
+  #performance .section-head h2 {
+    font-size: 25px;
+    line-height: 1.1;
+  }
+
+  #performance .section-kicker {
+    font-size: 11px;
+  }
+
+  /* Explore Full Performance link */
+  #performance .text-link {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  /* Metric values */
+  #performance .metric-card strong {
+    font-size: 32px;
+    line-height: 1.1;
+  }
+
+  /* Metric labels */
+  #performance .metric-card span {
+    font-size: 10px;
+    line-height: 1.25;
+    letter-spacing: 0.06em;
+  }
+
+  #about .section-kicker {
+    font-size: 11px;
+  }
+
+  #about h2 {
+    font-size: 25px;
+    line-height: 1.1;
+  }
+
+  /* All remaining section kickers */
+  .section-kicker {
+    font-size: 11px;
+  }
+
+  /* All remaining section headings */
+  .section h2 {
+    font-size: 25px;
+    line-height: 1.1;
+  }
+
+  #about .signature {
+    margin-bottom: -50px;
+  }
+}
+
+/* Recruitment round-details event type */
+.trend-round-type {
+  display: inline-block;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  background: #e9eef2;
+  border-radius: 4px;
+  color: #496579;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Round-details popup spacing refinement */
+.trend-course-name {
+  margin-top: 0 !important;
+}
+
+.trend-round-type {
+  margin-bottom: 4px;
+}
+
+.trend-info-stats > div {
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.trend-info-stats > div > span {
+  min-width: 72px;
+}
+
+/* Remove the outline around the popup statistics */
+.trend-info-stats {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Center only the Round Type label */
+.trend-round-type {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Single centered divider between statistics columns */
+.trend-info-stats {
+  position: relative;
+  column-gap: 28px;
+}
+
+.trend-info-stats::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #dbe2e6;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Slightly darker statistics dividers */
+.trend-info-stats > div {
+  border-top-color: #b8c5ce;
+}
+
+.trend-info-stats::before {
+  background: #b8c5ce;
+}
+
+/* =========================================================
+   TABLET HERO REFINEMENT — TRIAL 2
+   681px–980px
+   ========================================================= */
+
+@media (min-width: 681px) and (max-width: 980px) {
+
+  .site-header {
+    min-height: 64px;
+    padding: 8px 20px;
+  }
+
+  .hero {
+    min-height: 0;
+    height: 220px;
+  }
+
+  .hero-image,
+  .hero-shade {
+    height: 100%;
+  }
+
+  .hero-image {
+    object-position: 62% 28%;
+  }
+
+  .hero-content {
+    min-height: 220px;
+    height: 220px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .hero-copy {
+    max-width: 430px;
+    padding-left: 16px;
+    border-left-width: 4px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 5.2vw, 46px);
+    line-height: .9;
+    margin: 5px 0 8px;
+  }
+
+  .hero-sub {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .stat-strip {
+    margin-top: 0;
+    width: 100%;
+    max-width: none;
+    min-height: 80px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-strip > div {
+    min-height: 80px;
+    padding: 12px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-strip strong {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .stat-strip span {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .first-glance {
+    padding: 10px 0 18px;
+  }
+
+  .first-glance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .first-glance .trend-card,
+  .first-glance #video {
+    padding: 12px;
+  }
+
+  .first-glance-title,
+  .first-glance #video h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  /* Keep Scoring Trend and Swing Video side-by-side */
+  .first-glance .trend-card {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .first-glance #video {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .first-glance .trend-chart {
+    height: 210px;
+    margin-top: 4px;
+  }
+
+  /* Equal-height Scoring Trend and Swing Video cards */
+  .first-glance .trend-card,
+  .first-glance #video {
+    height: 100%;
+  }
+
+  /* Reduce space before Performance Snapshot */
+  .first-glance {
+    padding-bottom: 8px;
+  }
+
+  #performance.section {
+    padding-top: 28px;
+  }
+
+}
+
+/* =========================================================
+   TABLET SECTION SPACING
+   681px–980px
+   ========================================================= */
+
+@media (min-width: 681px) and (max-width: 980px) {
+
+  .section,
+  .section-tint {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  #performance.section {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  #about.section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  #results.section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  #schedule.section,
+  #schedule.section-tint {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+}
+
+/* =========================================================
+   TABLET PROFILE / ACADEMICS REFINEMENT
+   681px–980px
+   ========================================================= */
+
+@media (min-width: 681px) and (max-width: 980px) {
+
+  /* Use the normal grid gap before Academics */
+  .three-col > div:nth-child(2) {
+    margin-top: 0;
+  }
+
+  /* Keep At a Glance and Academics information compact */
+  .quick-card dl div,
+  .academic-list div {
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .quick-card dt,
+  .academic-list dt {
+    flex: 0 0 190px;
+  }
+
+  .quick-card dd,
+  .academic-list dd {
+    flex: 1;
+    text-align: left;
+  }
+
+} /* closes TABLET PROFILE / ACADEMICS REFINEMENT */
+
+/* =========================================================
+   TABLET LOWER-SECTION CARD TREATMENT
+   681px–980px
+   ========================================================= */
+
+@media (min-width: 681px) and (max-width: 980px) {
+
+  #results,
+  #schedule {
+    background: #fff;
+    box-shadow: var(--shadow);
+  }
+
+}
+
+/* =========================================================
+   TABLET CARD SHADOWS — RESULTS + ACADEMICS
+   681px–980px
+   ========================================================= */
+
+@media (min-width: 681px) and (max-width: 980px) {
+
+  #results {
+    background: #fff;
+    box-shadow: var(--shadow);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #academics {
+    background: #fff;
+    box-shadow: var(--shadow);
+    padding: 22px 24px;
+  }
+
+}
+
+@media (min-width: 681px) and (max-width: 980px) {
+
+  #results {
+    background: #ffffff;
+    border: 1px solid #e1e7ec;
+    box-shadow: 0 8px 28px rgba(10, 34, 53, .14);
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 28px 24px;
+  }
+
+}
+
+/* Tablet — Upcoming Schedule card padding */
+@media (min-width: 681px) and (max-width: 980px) {
+
+  #schedule {
+    padding: 22px 24px;
+  }
+
+}
+
+/* Tablet — Recent Tournament Results readability */
+@media (min-width: 681px) and (max-width: 980px) {
+
+  #results table {
+    font-size: 15px;
+  }
+
+  #results th {
+    font-size: 12px;
+  }
+
+}
+
+/* =========================================================
+   DESKTOP / LAPTOP REFINEMENT — TRIAL 1
+   981px and up
+   ========================================================= */
+
+@media (min-width: 981px) {
+
+  .hero {
+    min-height: 0;
+    height: 300px;
+  }
+
+  .hero-image,
+  .hero-shade {
+    height: 100%;
+  }
+
+  .hero-image {
+    object-position: 62% 28%;
+  }
+
+.hero-content {
+  min-height: 300px;
+  height: 300px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  justify-content: center;
+}
+
+  .hero-copy {
+    max-width: 620px;
+  }
+
+.hero h1 {
+  font-size: clamp(48px, 5.2vw, 70px);
+  line-height: .9;
+  margin: 6px 0 10px;
+}
+
+  .hero-sub {
+    font-size: 16px;
+  }
+
+.stat-strip {
+  margin-top: 0;
+  width: 100%;
+  max-width: none;
+  min-height: 72px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-strip > div {
+  min-height: 72px;
+  padding: 10px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+  .stat-strip strong {
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .stat-strip span {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .first-glance {
+    padding-top: 14px;
+  }
+
+  .first-glance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .first-glance .trend-card,
+  .first-glance #video {
+    height: 100%;
+  }
+}
+
+  /* =========================================================
+   DESKTOP / LAPTOP SECTION SPACING
+   981px and up
+   ========================================================= */
+
+@media (min-width: 981px) {
+
+  /* Reduce oversized spacing between main sections */
+  .section,
+  .section-tint {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  /* Performance Snapshot */
+  #performance.section {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  /* Player Profile */
+  #about.section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  /* Recent Tournament Results */
+  #results.section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  /* Upcoming Schedule */
+  #schedule.section,
+  #schedule.section-tint {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+}
+
+/* =========================================================
+   DESKTOP / LAPTOP SECTION HEADING SIZES
+   981px and up
+   ========================================================= */
+
+@media (min-width: 981px) {
+
+  .section h2 {
+    font-size: 34px;
+    line-height: 1.1;
+  }
+
+  .section-kicker {
+    font-size: 12px;
+  }
+
+}
+
+/* Desktop — Recent Tournament Results readability */
+@media (min-width: 981px) {
+
+  #results table {
+    font-size: 16px;
+  }
+
+  #results th {
+    font-size: 13px;
+  }
+
+}
+
+/* =========================================================
+   DESKTOP — TWO-COLUMN SCHEDULE / ACADEMICS
+   981px and up
+   ========================================================= */
+
+@media (min-width: 981px) {
+
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* Schedule and Academics occupy the first row */
+  .three-col > div:nth-child(1),
+  .three-col > div:nth-child(2) {
+    grid-column: auto;
+    min-width: 0;
+  }
+
+  /* What Coaches Say occupies its own full-width row */
+  .three-col > div:nth-child(3) {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+  }
+
+  /* Matching card treatment for the first two columns */
+  #schedule,
+  #academics {
+    background: #fff;
+    box-shadow: var(--shadow);
+    padding: 24px;
+  }
+
+}
+
+@media (min-width: 981px) {
+
+  .three-col {
+    align-items: stretch;
+  }
+
+  #schedule,
+  #academics {
+    height: 100%;
+  }
+
+}
+
+/* =========================================================
+   LARGE DESKTOP — STRONGER 1920px TREATMENT
+   1600px and up
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+  .shell {
+    max-width: 1540px;
+  }
+
+  .hero-copy {
+    max-width: 720px;
+  }
+
+  .hero h1 {
+    font-size: 74px;
+  }
+
+  .first-glance-grid {
+    gap: 28px;
+  }
+
+}
+
+/* =========================================================
+   LARGE DESKTOP — CENTER THE 4 HERO STAT TILES
+   1600px and up
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+  .stat-strip {
+    grid-template-columns:
+      minmax(120px, 1fr)
+      repeat(4, minmax(0, 1fr))
+      minmax(120px, 1fr);
+  }
+
+  .stat-strip > div:nth-child(1) {
+    grid-column: 2;
+  }
+
+  .stat-strip > div:nth-child(2) {
+    grid-column: 3;
+  }
+
+  .stat-strip > div:nth-child(3) {
+    grid-column: 4;
+  }
+
+  .stat-strip > div:nth-child(4) {
+    grid-column: 5;
+  }
+
+}
+
+/* =========================================================
+   SMALL MOBILE — HEADER + HERO TEXT
+   430px and below
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  .site-header {
+    min-height: 56px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+.hero-copy {
+  max-width: 245px;
+  padding-left: 18px;
+  transform: translateY(64px);
+}
+
+.hero h1 {
+  font-size: 35px;
+  line-height: .9;
+  margin: 4px 0 9px;
+}
+
+  .hero-sub {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+  }
+
+  .hero {
+  height: 189px;
+  min-height: 0;
+}
+
+.hero-image,
+.hero-shade {
+  height: 189px;
+}
+
+.hero-content {
+  min-height: 230px;
+  height: 189px;
+}
+
+.stat-strip > div {
+  min-height: 66px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+}
+

@@ -77,6 +77,43 @@ function roundEndedEarly(round) {
   return Boolean(payload?.roundEndedEarly);
 }
 
+function isOrdinaryNineHoleRound(round) {
+  const payload = getPayload(round);
+  const details = payload?.details || payload?.roundDetails || {};
+
+  const roundLength = Number(
+    details.roundLength || payload?.roundLength || round.round_length || 0
+  );
+
+  // Explicitly planned 9-hole rounds are not recruiting rounds.
+  if (roundLength === 9) return true;
+
+  // Legacy rounds without a round-length field remain eligible.
+  return false;
+}
+
+function isRecruitingTournamentRound(round) {
+  const payload = getPayload(round);
+  const details = payload?.details || payload?.roundDetails || {};
+
+  const roundType = String(
+    round?.round_type ||
+    details?.roundType ||
+    payload?.roundType ||
+    ""
+  )
+    .trim()
+    .toLowerCase();
+
+  // These are the competition types intended for the public
+  // recruiting scoring profile.
+  return (
+    roundType === "jr pga tournament" ||
+    roundType === "high school tournament" ||
+    roundType === "ajga tournament"
+  );
+}
+
 function getPartialRoundNote(round) {
   if (!roundEndedEarly(round)) return "";
 
@@ -392,6 +429,18 @@ function showTrendRoundInfo(round) {
   const yardage = round.tee_yardage || "--";
   const rating = round.tee_rating || "--";
   const slope = round.tee_slope || "--";
+  const rawRoundType = String(
+  round.round_type ||
+  getPayload(round)?.details?.roundType ||
+  getPayload(round)?.roundDetails?.roundType ||
+  getPayload(round)?.roundType ||
+  ""
+).trim();
+
+const roundTypeDisplay =
+  rawRoundType.toLowerCase() === "high school tournament"
+    ? "CHSAA High School Tournament"
+    : rawRoundType;
 
   const vsParText =
     vsPar > 0 ? `+${vsPar}` :
@@ -399,19 +448,28 @@ function showTrendRoundInfo(round) {
     "E";
 
   info.hidden = false;
+  openTrendDetailsModal();
 
 info.innerHTML = `
   <div class="trend-info-heading">
-    <strong>${round.round_date || "Date not listed"}</strong>
-    
-<span>
-  ${round.course_name || "Course not listed"}
-  ${roundEndedEarly(round)
-    ? ` <em class="partial-round-note">${getPartialRoundNote(round)}</em>`
-    : ""}
-</span>
+    <strong class="trend-round-date">
+      ${round.round_date || "Date not listed"}
+    </strong>
 
-    <small>${yardage} yards · Rating ${rating} · Slope ${slope}</small>
+    ${roundTypeDisplay
+      ? `<div class="trend-round-type">${roundTypeDisplay}</div>`
+      : ""}
+
+    <span class="trend-course-name">
+      ${round.course_name || "Course not listed"}
+      ${roundEndedEarly(round)
+        ? ` <em class="partial-round-note">${getPartialRoundNote(round)}</em>`
+        : ""}
+    </span>
+
+    <small class="trend-course-meta">
+      ${yardage} yards · Rating ${rating} · Slope ${slope}
+    </small>
   </div>
 
   <div class="trend-info-stats">
@@ -421,9 +479,9 @@ info.innerHTML = `
     <div><span>GIR</span><strong>${Math.round(gir)}%</strong></div>
     <div><span>Putts</span><strong>${putts || "--"}</strong></div>
     <div>
-  <span>Putts / GIR</span>
-  <strong>${puttsPerGir !== null ? puttsPerGir.toFixed(2) : "--"}</strong>
-</div>
+      <span>Putts / GIR</span>
+      <strong>${puttsPerGir !== null ? puttsPerGir.toFixed(2) : "--"}</strong>
+    </div>
   </div>
 `;
 }
@@ -628,14 +686,14 @@ svg.innerHTML = `
     const change = last - first;
 
     if (change < 0) {
-      trendSummary.textContent =
-        `Scoring down ${Math.abs(change).toFixed(0)} strokes from first to most recent full round`;
+      trendSummary.innerHTML =
+        `<strong>Down ${Math.abs(change).toFixed(0)} strokes</strong> <br>from first to most recent round`;
     } else if (change > 0) {
       trendSummary.textContent =
-        `Scoring up ${change.toFixed(0)} strokes from first to most recent full round`;
+        `Up ${change.toFixed(0)} strokes from first to most recent round`;
     } else {
       trendSummary.textContent =
-        "Scoring level from first to most recent full round";
+        "No change from first to most recent round";
     }
   }
 }
@@ -683,14 +741,37 @@ async function loadRecruitmentData() {
   );
 
   // Recruiting scoring profile uses full rounds only.
-  const qualifyingRounds = dedupeRounds(allRounds).filter(
-    round =>
-      !roundEndedEarly(round) &&
-      Number(round.total_score || 0) > 0
-  );
+// Recruiting scoring profile:
+// - full rounds only
+// - planned 9-hole rounds excluded
+// - P2 rounds must be recognized tournament rounds
+// - legacy V1 rounds remain eligible so older history is preserved
+const qualifyingRounds = dedupeRounds(allRounds).filter(round => {
+  const hasValidScore =
+    Number(round.total_score || 0) > 0;
 
-  const last10 = qualifyingRounds.slice(-10);
-  const handicapRounds = qualifyingRounds.slice(-20);
+  const isFullRound =
+    !roundEndedEarly(round) &&
+    !isOrdinaryNineHoleRound(round);
+
+  const isLegacyV1 =
+    round.source === "V1";
+
+  const isEligibleTournament =
+    isRecruitingTournamentRound(round);
+
+  return (
+    hasValidScore &&
+    isFullRound &&
+    (
+      isLegacyV1 ||
+      isEligibleTournament
+    )
+  );
+});
+
+const last10 = qualifyingRounds.slice(-10);
+const handicapRounds = qualifyingRounds.slice(-20);
 
 
 console.log("HANDICAP ROUND COUNT:", handicapRounds.length);
@@ -716,6 +797,7 @@ const lastLast10Date = last10.length
 
 const partialRoundsInWindow = dedupeRounds(allRounds).filter(round => {
   if (!roundEndedEarly(round)) return false;
+  if (isOrdinaryNineHoleRound(round)) return false;
   if (!firstLast10Date || !lastLast10Date) return false;
 
   const roundDate = new Date(round.round_date);
@@ -829,3 +911,29 @@ function setupMobileMenu() {
 window.addEventListener("load", loadRecruitmentData);
 window.addEventListener("load", setupHandicapInfoModal);
 window.addEventListener("load", setupMobileMenu);
+// Preview-only round details overlay. Existing chart data and calculations are preserved.
+function openTrendDetailsModal() {
+  const modal = document.getElementById("trendDetailsModal");
+  if (!modal) return;
+  modal.hidden = false;
+  document.getElementById("trendDetailsCloseBtn")?.focus();
+}
+function closeTrendDetailsModal() {
+  const modal = document.getElementById("trendDetailsModal");
+  if (!modal || modal.hidden) return;
+  modal.hidden = true;
+  document.getElementById("trendRoundInfo").hidden = true;
+}
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("trendDetailsCloseBtn")
+    ?.addEventListener("click", closeTrendDetailsModal);
+
+  document.querySelector("[data-trend-close]")
+    ?.addEventListener("click", closeTrendDetailsModal);
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeTrendDetailsModal();
+    }
+  });
+});
