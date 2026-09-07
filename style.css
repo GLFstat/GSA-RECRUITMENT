@@ -1669,6 +1669,48 @@ body {
 
 }
 
+
+/* =========================================================
+   LAPTOP REFINEMENT
+   981px–1599px
+   ========================================================= */
+
+@media (min-width: 981px) and (max-width: 1599px) {
+
+  .hero {
+    height: 260px;
+  }
+
+  .hero-content {
+    min-height: 250px;
+    height: 260px;
+  }
+
+  .first-glance-grid {
+    align-items: stretch;
+  }
+
+  .first-glance .trend-card,
+  .first-glance #video {
+    height: 100%;
+  }
+
+  .first-glance #video {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .first-glance #video .video-card {
+    flex: 1;
+  }
+
+  .first-glance #video .video-card img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+
 /* =========================================================
    LARGE DESKTOP — STRONGER 1920px TREATMENT
    1600px and up
