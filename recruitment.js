@@ -6,6 +6,21 @@ const recruitmentSupabase = window.supabase.createClient(
   SUPABASE_KEY
 );
 
+async function getRecruitingDataStartDate() {
+  const { data, error } = await recruitmentSupabase
+    .from("recruiting_settings")
+    .select("data_start_date")
+    .eq("id", 1)
+    .single();
+
+  if (error) {
+    console.error("Recruiting start date error:", error);
+    return null;
+  }
+
+  return data?.data_start_date || null;
+}
+
 function getAverage(values) {
   if (!values.length) return 0;
 
@@ -352,18 +367,18 @@ function updateRecruitingMetrics(rounds, handicapRounds) {
   const puttsPerGir = getPuttsPerGir(rounds);
 
   document.getElementById("recentScoringAvg").textContent =
-    scoringAvg.toFixed(1);
+  rounds.length ? scoringAvg.toFixed(1) : "--";
 
    const heroScoringAvg = document.getElementById("heroRecentScoringAvg");
 
 if (heroScoringAvg) {
-  heroScoringAvg.textContent = scoringAvg.toFixed(1);
-} 
-
-const glanceScoringAvg = document.getElementById("glanceScoringAvg");
+  heroScoringAvg.textContent =
+    rounds.length ? scoringAvg.toFixed(1) : "--";
+}
 
 if (glanceScoringAvg) {
-  glanceScoringAvg.textContent = scoringAvg.toFixed(1);
+  glanceScoringAvg.textContent =
+    rounds.length ? scoringAvg.toFixed(1) : "--";
 }
 
 const estimatedHandicap =
@@ -488,7 +503,72 @@ info.innerHTML = `
 
 function drawRecruitingTrend(rounds) {
   const svg = document.getElementById("recruitingTrendChart");
-  if (!svg || !rounds.length) return;
+  if (!svg) return;
+
+  if (!rounds.length) {
+    const width = 520;
+    const height = 220;
+    const left = 42;
+    const right = 18;
+    const top = 24;
+    const bottom = 38;
+    const chartBottom = height - bottom;
+    const chartRight = width - right;
+
+    let gridHtml = "";
+
+    [70, 75, 80, 85, 90].forEach((score, index) => {
+      const y = top + index * ((chartBottom - top) / 4);
+
+      gridHtml += `
+        <line
+          x1="${left}" y1="${y}"
+          x2="${chartRight}" y2="${y}"
+          class="trend-grid-line"
+        />
+        <text
+          x="${left - 9}" y="${y + 4}"
+          text-anchor="end"
+          class="trend-axis-label"
+        >${score}</text>
+      `;
+    });
+
+    svg.innerHTML = `
+      ${gridHtml}
+      <line
+        x1="${left}" y1="${top}"
+        x2="${left}" y2="${chartBottom}"
+        class="trend-grid-line"
+      />
+      <line
+        x1="${left}" y1="${chartBottom}"
+        x2="${chartRight}" y2="${chartBottom}"
+        class="trend-grid-line"
+      />
+      <text
+        x="${width / 2}"
+        y="${height / 2 - 5}"
+        text-anchor="middle"
+        class="trend-axis-label"
+        style="font-size: 13px; font-weight: 600;"
+      >No qualifying rounds yet</text>
+      <text
+        x="${width / 2}"
+        y="${height / 2 + 13}"
+        text-anchor="middle"
+        class="trend-axis-label"
+        style="font-size: 10px;"
+      >New Day 1: September 8, 2026</text>
+    `;
+
+    const trendSummary = document.getElementById("trendSummary");
+    if (trendSummary) {
+      trendSummary.textContent = "Awaiting first qualifying round";
+    }
+
+    return;
+  }
 
   // Only full rounds determine the scoring scale and scoring line.
   const completedRounds = rounds.filter(
@@ -702,6 +782,14 @@ svg.innerHTML = `
 async function loadRecruitmentData() {
   console.log("Recruitment page: loading live Stracker data...");
 
+  const recruitingStartDate =
+    await getRecruitingDataStartDate();
+
+  console.log(
+    "RECRUITING DATA START DATE:",
+    recruitingStartDate
+  );
+
   const { data: v1Data, error: v1Error } =
     await recruitmentSupabase
       .from("completed_rounds")
@@ -760,9 +848,20 @@ const qualifyingRounds = dedupeRounds(allRounds).filter(round => {
   const isEligibleTournament =
     isRecruitingTournamentRound(round);
 
+  const roundDate =
+    String(round.round_date || "").slice(0, 10);
+
+  const isOnOrAfterRecruitingStart =
+    !recruitingStartDate ||
+    (
+      roundDate &&
+      roundDate >= recruitingStartDate
+    );
+
   return (
     hasValidScore &&
     isFullRound &&
+    isOnOrAfterRecruitingStart &&
     (
       isLegacyV1 ||
       isEligibleTournament
@@ -800,12 +899,22 @@ const partialRoundsInWindow = dedupeRounds(allRounds).filter(round => {
   if (isOrdinaryNineHoleRound(round)) return false;
   if (!firstLast10Date || !lastLast10Date) return false;
 
-  const roundDate = new Date(round.round_date);
+const roundDate = new Date(round.round_date);
 
-  return (
-    roundDate >= firstLast10Date &&
-    roundDate <= lastLast10Date
-  );
+const roundDateString =
+  String(round.round_date || "").slice(0, 10);
+
+if (
+  recruitingStartDate &&
+  roundDateString < recruitingStartDate
+) {
+  return false;
+}
+
+return (
+  roundDate >= firstLast10Date &&
+  roundDate <= lastLast10Date
+);
 });
 
 const chartRounds = [
