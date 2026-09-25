@@ -869,7 +869,7 @@ const qualifyingRounds = dedupeRounds(allRounds).filter(round => {
   );
 });
 
-const last10 = qualifyingRounds.slice(-10);
+const last10 = qualifyingRounds.slice(-8);
 const handicapRounds = qualifyingRounds.slice(-20);
 
 
