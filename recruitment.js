@@ -419,7 +419,7 @@ if (glanceHandicap) {
       ? puttsPerGir.toFixed(2)
       : "--";
 
-  console.log("RECRUITING LAST 10:", rounds);
+  console.log("RECRUITING LAST 8 TEST:", rounds);
 
   console.log("RECRUITING METRICS:", {
     scoringAvg,
